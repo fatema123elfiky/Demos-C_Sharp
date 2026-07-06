@@ -180,6 +180,16 @@ namespace Session05
 
 
             #endregion
+
+            #region do while
+            bool flag;
+            do
+            {
+                int Age;
+                Console.Write("enter ur age : ");
+                flag = int.TryParse(Console.ReadLine(), out Age);
+            } while (!flag);
+            #endregion
         }
     }
 }
