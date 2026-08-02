@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="Bank-03/Bank-03.csproj" Id="427f25d1-487f-4e2b-acee-416d251e42de" />
+  <Project Path="Common07/Common07.csproj" Id="b6f4fdfd-40a1-4dd8-aebd-f3bb8980e044" />
   <Project Path="Demo04/Demo04.csproj" Id="39f0b9da-ccba-431a-b235-311474c1f49c" />
   <Project Path="Demo05/Demo05.csproj" Id="0c65c76c-44e6-4fd6-878a-1f7706b3a785" />
   <Project Path="Demo06/Demo06.csproj" Id="7812fcae-d69b-4fd0-b200-11a0c905a3e0" />
