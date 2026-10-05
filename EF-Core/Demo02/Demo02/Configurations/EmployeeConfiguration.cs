@@ -16,7 +16,7 @@ namespace Demo02.Configurations
         public void Configure(EntityTypeBuilder<Empolyee> builder)
         {
             builder.ToTable("Employees");
-            builder.HasKey(emp => emp.Id);
+            builder.HasKey(emp => emp.EmpId);
             builder.Property(emp => emp.Name)
                 .IsRequired()
                 .HasColumnType("varchar")
@@ -34,6 +34,8 @@ namespace Demo02.Configurations
                    .HasDefaultValue(10);
 
             builder.HasKey(emp => emp.Age);
+
+           
         }
     }
 }

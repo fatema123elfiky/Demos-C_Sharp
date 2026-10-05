@@ -34,5 +34,12 @@ namespace Demo02.Models
 
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
+
+        [ForeignKey(nameof(Course))]
+        public int CourseId{ get; set; }
+
+        [InverseProperty(nameof(Course.Students))]
+        public Course Course { get; set; } = default!;
+
     }
 }

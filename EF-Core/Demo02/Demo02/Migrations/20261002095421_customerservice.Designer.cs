@@ -4,6 +4,7 @@ using Demo02.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo02.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261002095421_customerservice")]
+    partial class customerservice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,25 +91,9 @@ namespace Demo02.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<string>("LastCreatedby")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastModifiedby")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Id");
 
@@ -144,41 +131,6 @@ namespace Demo02.Migrations
                     b.ToTable("EmployeeCar");
                 });
 
-            modelBuilder.Entity("Demo02.Models.EmployeeSelf", b =>
-                {
-                    b.Property<int>("EmpId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmpId"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("HiringDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ManagerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("EmpId");
-
-                    b.HasIndex("ManagerId");
-
-                    b.ToTable("EmployeeSelf");
-                });
-
             modelBuilder.Entity("Demo02.Models.Empolyee", b =>
                 {
                     b.Property<int>("Age")
@@ -197,7 +149,7 @@ namespace Demo02.Migrations
                     b.Property<DateTime>("HiringDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 10, 3, 14, 45, 4, 534, DateTimeKind.Local).AddTicks(760));
+                        .HasDefaultValue(new DateTime(2026, 10, 2, 12, 54, 20, 421, DateTimeKind.Local).AddTicks(1074));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -289,43 +241,6 @@ namespace Demo02.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Demo02.Models.Customer", b =>
-                {
-                    b.OwnsOne("Demo02.Models.Address", "Address", b1 =>
-                        {
-                            b1.Property<int>("CustomerId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("varchar")
-                                .HasColumnName("City");
-
-                            b1.Property<string>("Country")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("varchar")
-                                .HasColumnName("Country");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("varchar")
-                                .HasColumnName("Street");
-
-                            b1.HasKey("CustomerId");
-
-                            b1.ToTable("Customers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
-
-                    b.Navigation("Address")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Demo02.Models.CustomerService", b =>
                 {
                     b.HasOne("Demo02.Models.Customer", "Customer")
@@ -362,17 +277,6 @@ namespace Demo02.Migrations
                     b.Navigation("Car");
 
                     b.Navigation("Empolyee");
-                });
-
-            modelBuilder.Entity("Demo02.Models.EmployeeSelf", b =>
-                {
-                    b.HasOne("Demo02.Models.EmployeeSelf", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("Demo02.Models.Student", b =>

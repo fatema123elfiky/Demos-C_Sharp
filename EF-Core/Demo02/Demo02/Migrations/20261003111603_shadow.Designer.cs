@@ -4,6 +4,7 @@ using Demo02.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo02.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261003111603_shadow")]
+    partial class shadow
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,7 +200,7 @@ namespace Demo02.Migrations
                     b.Property<DateTime>("HiringDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 10, 3, 14, 45, 4, 534, DateTimeKind.Local).AddTicks(760));
+                        .HasDefaultValue(new DateTime(2026, 10, 3, 14, 16, 3, 153, DateTimeKind.Local).AddTicks(6882));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -287,43 +290,6 @@ namespace Demo02.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("Demo02.Models.Customer", b =>
-                {
-                    b.OwnsOne("Demo02.Models.Address", "Address", b1 =>
-                        {
-                            b1.Property<int>("CustomerId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("varchar")
-                                .HasColumnName("City");
-
-                            b1.Property<string>("Country")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("varchar")
-                                .HasColumnName("Country");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("varchar")
-                                .HasColumnName("Street");
-
-                            b1.HasKey("CustomerId");
-
-                            b1.ToTable("Customers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
-
-                    b.Navigation("Address")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Demo02.Models.CustomerService", b =>
